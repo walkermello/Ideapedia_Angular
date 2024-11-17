@@ -18,6 +18,7 @@ import { CoreModule } from '../core/core.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NgxDocViewerModule } from 'ngx-doc-viewer'; // Correct import from the package
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { NgxDocViewerModule } from 'ngx-doc-viewer'; // Correct import from the 
     CoreModule,
     NgbModule,
     NgxDocViewerModule, // Add the NgxDocViewerModule here
+    FontAwesomeModule,
   ],
 })
 export class AdminModule {}

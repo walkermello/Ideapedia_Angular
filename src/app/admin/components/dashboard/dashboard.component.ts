@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { IIdea } from '../../../core/interfaces/i-idea';
 import { IdeaService } from '../../../core/services/idea.service';
 import { FileService } from '../../../core/services/file.service';
+import { UserService } from '../../../core/services/user.service';
+import { DetailService } from '../../../core/services/detail.service';
+import { IDetailIdea } from '../../../core/interfaces/i-detail-idea';
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,16 +13,20 @@ import { FileService } from '../../../core/services/file.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  details: IDetailIdea[] = [];
   ideas: IIdea[] = [];
   previewUrl: string | null = null;
   selectedItemId: number | null = null;
   pageNumber: number = 0;
   totalPages: number = 1;
-  pageSize: number = 3;
+  pageSize: number = 6;
+  value: string = 'Approved';
+  faEllipsisH = faEllipsisH;
 
   constructor(
-    private ideaService: IdeaService,
-    private fileService: FileService
+    private detailService: DetailService,
+    private fileService: FileService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -26,19 +34,29 @@ export class DashboardComponent implements OnInit {
   }
 
   loadIdeas(): void {
-    this.ideaService
-      .getIdeas(this.pageNumber, this.pageSize, 'asc', 'id', 'id', '')
-      .subscribe({
-        next: (response) => {
-          this.ideas = response.content || [];
-          this.totalPages = response.total_pages || 1;
+    this.detailService
+      .getApproved(
+        this.pageNumber,
+        this.pageSize,
+        'asc', // Default sort direction
+        'id', // Default sort field
+        'status', // Kolom yang difilter
+        this.value // Status yang ingin difilter (Approved)
+      )
+      .subscribe(
+        (response) => {
+          if (response && response.content) {
+            this.details = response.content; // Pastikan response.content berisi data yang benar
+            this.totalPages = response.total_pages; // Sesuaikan dengan nama field dalam response
+            console.log('Loaded Ideas: ', this.details);
+          } else {
+            console.error('Invalid response format');
+          }
         },
-        error: (err) => {
-          console.error('Failed to load ideas:', err);
-          this.ideas = [];
-          this.totalPages = 1;
-        },
-      });
+        (error) => {
+          console.error('Error loading ideas: ', error);
+        }
+      );
   }
 
   onPageChange(page: number): void {
@@ -46,11 +64,6 @@ export class DashboardComponent implements OnInit {
       this.pageNumber = page;
       this.loadIdeas();
     }
-  }
-
-  viewFile(itemId: number, filePath: string): void {
-    this.previewUrl = 'http://localhost:9095/idea/preview/22'; // Set preview URL for ngx-doc-viewer
-    this.selectedItemId = itemId; // Set selected item ID for preview
   }
 
   // Method untuk mendapatkan ekstensi dari nama file
@@ -61,5 +74,9 @@ export class DashboardComponent implements OnInit {
 
   getIdeaImageUrl(ideaId: number): string {
     return this.fileService.getIdeaImageUrl(ideaId); // Use FileService
+  }
+
+  getUserImageUrl(userId: number): string {
+    return this.userService.getUserImageUrl(userId); // Use FileService
   }
 }

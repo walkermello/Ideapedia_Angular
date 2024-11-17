@@ -20,6 +20,10 @@ export class ApproveEntryComponent {
   previewUrl: string | null = null;
   selectedItemId: number | null = null;
 
+  modalTitle: string = '';
+  modalContent: string = '';
+  modalContentType: 'text' | 'file' = 'text';
+
   // For feedback and users
   feedback: string = '';
   selectedPenguji: number = 0; // To store the selected user ID for penguji
@@ -266,17 +270,25 @@ export class ApproveEntryComponent {
     });
   }
 
-  // Method untuk membuka modal dan menampilkan preview file
-  previewFile(ideaId: number): void {
+  // Membuka modal dan menampilkan preview file
+  previewFile(ideaId: number, content: any): void {
     this.fileService.getFilePreviewLink(ideaId).subscribe({
       next: (response) => {
-        this.previewUrl = response.url; // Menyimpan URL file yang diterima
-        console.log('Received preview URL:', this.previewUrl);
-        this.selectedItemId = ideaId; // Menyimpan ID item yang sedang dipilih
+        this.previewUrl = response.url; // URL untuk ditampilkan di modal
+        this.selectedItemId = ideaId; // Simpan ID item yang dipilih
+        this.modalservice.open(content, { size: 'xl', backdrop: 'static' }); // Buka modal
       },
       error: (err) => {
         console.error('Error fetching preview URL', err);
       },
     });
+  }
+
+  // Open modal for full text
+  openFullTextModal(content: string, title: string, modal: any): void {
+    this.modalTitle = title;
+    this.modalContent = content;
+    this.modalContentType = 'text';
+    this.modalservice.open(modal, { size: 'lg' });
   }
 }

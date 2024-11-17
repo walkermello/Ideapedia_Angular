@@ -3,16 +3,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Set halaman SignIn agar mengisi seluruh tinggi layar */
+  min-height: 100vh; /* Pastikan tinggi halaman penuh */
   background-color: white; /* Warna latar belakang yang lebih lembut */
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
+/* Card Styling */
 .card {
   width: 100%;
   max-width: 400px; /* Lebar maksimum form */
-  margin: 20px;
+  margin: auto; /* Pemusatan kartu secara otomatis */
   padding: 20px;
   border-radius: 12px; /* Sudut kartu yang lebih halus */
   background-color: #faf6d4; /* Warna latar belakang kartu */

@@ -7,5 +7,6 @@ export interface IUser {
   email: string;
   password: string;
   noHp: string;
+  imgProfile: string;
   unitKerja: IUnitKerja;
 }

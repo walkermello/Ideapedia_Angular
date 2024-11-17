@@ -18,29 +18,15 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  box-sizing: border-box; /* Menambahkan box-sizing agar padding dan border dihitung dalam ukuran elemen */
 }
 
 /* Halaman Signin */
 .signin-page {
-  display: block;
   height: 100vh;
-}
-
-.signin-page .main-content {
-  display: block; /* Menonaktifkan sidebar pada halaman signin */
-}
-
-.signin-page .sidebar {
-  display: none; /* Sembunyikan sidebar pada halaman signin */
-}
-
-.signin-page .content {
-  margin: 0;
-  padding: 20px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-items: center; /* Menyusun konten di tengah-tengah halaman */
   background-color: #f0f0f0; /* Bisa diganti dengan warna yang sesuai */
 }
 

@@ -40,6 +40,31 @@ export class DetailService {
       .pipe(catchError(this.handleError));
   }
 
+  getApproved(
+    page: number = 0,
+    size: number = 3,
+    sort: string = 'asc',
+    sortBy: string = 'id',
+    column: string = 'status',
+    value: string = 'Approved'
+  ): Observable<ApiResponseDetailIdea> {
+    // Perbaiki URL sesuai dengan format yang diinginkan
+    const url = `${this.apiUrl}/${page}/${sort}/${sortBy}?size=${size}&col=${column}&val=${value}`;
+
+    console.log('Constructed URL: ', url); // Pastikan URL dibangun dengan benar
+
+    const token = localStorage.getItem('authToken'); // Konsisten dengan nama kunci di local storage
+    console.log('Retrieved Token from Local Storage:', token);
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token || ''}`, // Gunakan token atau string kosong jika token tidak ditemukan
+    });
+
+    return this.http
+      .get<ApiResponseDetailIdea>(url, { headers })
+      .pipe(catchError(this.handleError)); // Tangani error dengan baik
+  }
+
   // Update approveIdea to accept three judges and send the request in the desired format
   approveIdea(
     id: number,

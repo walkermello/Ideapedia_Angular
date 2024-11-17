@@ -62,4 +62,9 @@ export class UserService {
     // Send the POST request with the request body and headers
     return this.http.post(this.apiUrl, requestBody, { headers });
   }
+
+  // Mendapatkan URL gambar profile user berdasarkan ID
+  getUserImageUrl(userId: number): string {
+    return `${this.apiUrl}/image/${userId}`;
+  }
 }
