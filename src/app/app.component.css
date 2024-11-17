@@ -1,0 +1,55 @@
+/* Wrapper untuk content dan sidebar */
+.main-content {
+  display: flex;
+  height: 100vh; /* Set height untuk halaman penuh */
+  margin: 0;
+}
+
+/* Styling untuk konten utama */
+.content {
+  margin-left: 200px; /* Agar konten tidak tertutup oleh sidebar */
+  padding: 20px;
+  width: 100%;
+}
+
+/* Reset margin/padding pada html dan body untuk menghindari gap */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Halaman Signin */
+.signin-page {
+  display: block;
+  height: 100vh;
+}
+
+.signin-page .main-content {
+  display: block; /* Menonaktifkan sidebar pada halaman signin */
+}
+
+.signin-page .sidebar {
+  display: none; /* Sembunyikan sidebar pada halaman signin */
+}
+
+.signin-page .content {
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0; /* Bisa diganti dengan warna yang sesuai */
+}
+
+/* Styling form di halaman signin */
+.signin-page .signin-form {
+  width: 100%;
+  max-width: 400px; /* Menentukan lebar maksimum form */
+  padding: 30px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

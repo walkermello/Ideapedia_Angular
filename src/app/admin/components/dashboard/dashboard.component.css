@@ -1,0 +1,73 @@
+/* Card Styling */
+.card {
+  border: 1px solid #ddd; /* Menambahkan border tipis berwarna abu-abu */
+  border-radius: 10px; /* Membuat sudut kartu melengkung */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  margin-bottom: 10px;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Efek naik saat hover */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Bayangan lebih tajam saat hover */
+  border: 1px solid #007bff; /* Border berubah menjadi biru saat hover */
+}
+
+/* Image Styling */
+.card img {
+  border-radius: 8px; /* Membuat gambar memiliki sudut melengkung */
+  max-height: 200px; /* Membatasi tinggi maksimal gambar */
+  object-fit: cover; /* Memastikan gambar tidak terdistorsi */
+  border: 1px solid #ddd; /* Menambahkan border tipis di sekitar gambar */
+}
+
+/* Button Styling */
+.btn-outline-primary,
+.btn-outline-secondary {
+  border-radius: 20px; /* Membuat tombol lebih bulat */
+  padding: 0.5rem 1rem; /* Menyesuaikan padding */
+  font-size: 0.9rem; /* Ukuran font lebih kecil untuk tombol */
+}
+
+.btn-outline-primary:hover,
+.btn-outline-secondary:hover {
+  background-color: #007bff; /* Warna latar biru saat hover */
+  color: white; /* Mengubah warna teks menjadi putih */
+}
+
+/* Pagination Controls */
+.pagination-controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Jarak antar elemen */
+}
+
+.pagination-controls span {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #6c757d; /* Warna abu-abu */
+}
+
+/* Title Styling */
+h2 {
+  font-weight: bold;
+  color: #343a40; /* Warna teks utama */
+  margin-bottom: 1.5rem;
+}
+
+/* Creator and Date Styling */
+.card .mb-3 small {
+  font-size: 0.85rem;
+  color: #6c757d; /* Warna abu-abu */
+}
+
+/* Layout Spacing */
+.container {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.row.g-4 {
+  row-gap: 1.5rem; /* Jarak vertikal antar elemen */
+}

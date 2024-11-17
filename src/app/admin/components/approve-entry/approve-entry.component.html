@@ -1,1 +1,68 @@
-<p>approve-entry works!</p>
+<div class="new-entry-list">
+  <h2>New Entry List</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Judul</th>
+        <th>Deskripsi</th>
+        <th>File</th>
+        <th>Creator</th>
+        <th>NIP</th>
+        <th>Unit Kerja</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let detail of details">
+        <td>{{ detail.idea.judul }}</td>
+        <td>{{ detail.idea.deskripsi }}</td>
+        <td>
+          <!-- Make file name clickable to open PDF modal -->
+          <a (click)="previewFile(detail.idea.id)">
+            {{ detail.idea.fileName }}
+          </a>
+        </td>
+        <td>{{ detail.idea.user.username }}</td>
+        <td>{{ detail.idea.user.nip }}</td>
+        <td>{{ detail.idea.user.unitKerja.unitName }}</td>
+        <td>
+          <!-- Action buttons with images -->
+          <button class="btn-action" (click)="approveIdea(detail)">
+            <img src="/img/approve.svg" alt="Approve" class="action-icon" />
+          </button>
+          <button class="btn-action" (click)="openRejectModal(detail)">
+            <img src="/img/reject.svg" alt="Reject" class="action-icon" />
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <button
+      (click)="onPageChange(pageNumber - 1)"
+      [disabled]="pageNumber === 0"
+      class="pagination-btn"
+    >
+      Previous
+    </button>
+    <span>Page {{ pageNumber + 1 }} of {{ totalPages }}</span>
+    <button
+      (click)="onPageChange(pageNumber + 1)"
+      [disabled]="pageNumber + 1 === totalPages"
+      class="pagination-btn"
+    >
+      Next
+    </button>
+  </div>
+</div>
+
+<!-- File Preview Modal -->
+
+<ngx-doc-viewer
+  *ngIf="previewUrl"
+  [url]="previewUrl"
+  viewer="google"
+  style="width: 100%; height: 200px; border: none"
+></ngx-doc-viewer>

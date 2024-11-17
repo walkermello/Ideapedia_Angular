@@ -1,1 +1,49 @@
-<p>list-user works!</p>
+<div class="user-list">
+  <h2>User List</h2>
+
+  <!-- Add User Button -->
+  <div class="add-user-btn-container">
+    <button class="add-user-btn" (click)="addUser()">Add User</button>
+  </div>
+
+  <!-- Table for user list -->
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>NIP</th>
+        <th>Email</th>
+        <th>No. HP</th>
+        <th>Unit Kerja</th>
+        <th>Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.username }}</td>
+        <td>{{ user.nip }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.noHp }}</td>
+        <td>{{ user.unitKerja.unitName }}</td>
+        <td>{{ user.unitKerja.admin ? "Yes" : "No" }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <button
+      (click)="onPageChange(pageNumber - 1)"
+      [disabled]="pageNumber === 0"
+    >
+      Previous
+    </button>
+    <span>Page {{ pageNumber + 1 }} of {{ totalPages }}</span>
+    <button
+      (click)="onPageChange(pageNumber + 1)"
+      [disabled]="pageNumber + 1 === totalPages"
+    >
+      Next
+    </button>
+  </div>
+</div>

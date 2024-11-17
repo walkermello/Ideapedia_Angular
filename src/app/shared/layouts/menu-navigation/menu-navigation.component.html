@@ -1,1 +1,10 @@
-<p>menu-navigation works!</p>
+<div class="sidebar">
+  <ul class="menu">
+    <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+    <li><a routerLink="/new-entry" routerLinkActive="active">New Entry</a></li>
+    <li><a routerLink="/list-user" routerLinkActive="active">List User</a></li>
+  </ul>
+
+  <!-- Button Log Out di bawah sidebar -->
+  <button (click)="logout()" class="logout-btn">Log Out</button>
+</div>

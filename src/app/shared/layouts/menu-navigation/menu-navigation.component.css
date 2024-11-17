@@ -1,0 +1,58 @@
+/* Sidebar Styles */
+.sidebar {
+  width: 200px;
+  background-color: #ecc588;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0; /* memastikan sidebar berada di kiri */
+  height: 100%;
+  display: flex;
+  flex-direction: column; /* Mengatur elemen dalam sidebar secara vertikal */
+  justify-content: space-between; /* Membuat elemen menu di atas dan tombol log out di bawah */
+  padding-top: 20px;
+}
+
+.sidebar .menu {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: auto; /* Menambahkan margin bawah agar menu berada di atas */
+}
+
+.sidebar .menu li {
+  padding: 15px 20px;
+}
+
+.sidebar .menu li a {
+  color: black; /* Mengubah warna font menu menjadi hitam */
+  text-decoration: none;
+  display: block;
+  font-size: 18px;
+  padding: 10px 10px; /* Memberikan padding agar area klik lebih besar */
+  transition: background-color 0.3s, padding 0.3s; /* Tambahkan transisi agar perubahan lebih halus */
+}
+
+/* Active link styling */
+.sidebar .menu li a.active {
+  background-color: #f0d7af;
+  color: black; /* Agar teks aktif tetap hitam */
+  padding: 15px 20px; /* Tambahkan padding ekstra saat aktif untuk memperbesar area background */
+  border-radius: 5px; /* Memberikan border-radius agar sudut lebih halus */
+}
+
+/* Tombol Log Out */
+.logout-btn {
+  background-color: #0f0303; /* Warna merah */
+  color: white; /* Warna font tombol menjadi hitam */
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  margin: 20px auto; /* Margin auto untuk memusatkan tombol secara horizontal */
+  cursor: pointer;
+  border-radius: 5px;
+  width: 95%; /* Lebar tombol yang lebih kecil dari sidebar */
+}
+
+.logout-btn:hover {
+  background-color: black; /* Warna merah yang lebih gelap saat hover */
+}
