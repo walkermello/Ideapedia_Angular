@@ -1,0 +1,2 @@
+export interface IBookmark {
+}
