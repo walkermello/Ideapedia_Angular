@@ -1,10 +1,43 @@
 <div class="sidebar">
+  <!-- User Profile -->
+  <div class="user-profile">
+    <img
+      [src]="user ? getUserImageUrl(user.id) : '/img/img.png'"
+      alt="{{ user?.username || 'Default Avatar' }}"
+      class="profile-pic"
+    />
+    <div class="user-info">
+      <p class="user-name">{{ user?.username }}</p>
+      <p class="user-nip">{{ user?.nip }}</p>
+    </div>
+  </div>
+
+  <!-- Navigation Menu -->
   <ul class="menu">
-    <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
-    <li><a routerLink="/new-entry" routerLinkActive="active">New Entry</a></li>
-    <li><a routerLink="/list-user" routerLinkActive="active">List User</a></li>
+    <li>
+      <a routerLink="/dashboard" routerLinkActive="active">
+        <fa-icon [icon]="faTachometerAlt"></fa-icon> Dashboard
+      </a>
+    </li>
+    <li>
+      <a routerLink="/new-entry" routerLinkActive="active">
+        <fa-icon [icon]="faListCheck"></fa-icon> New Entry
+      </a>
+    </li>
+    <li>
+      <a routerLink="/list-user" routerLinkActive="active">
+        <fa-icon [icon]="faUsers"></fa-icon> List User
+      </a>
+    </li>
+    <li>
+      <a routerLink="/deleted-data" routerLinkActive="active">
+        <fa-icon [icon]="faTrashAlt"></fa-icon> Deleted Data
+      </a>
+    </li>
   </ul>
 
-  <!-- Button Log Out di bawah sidebar -->
-  <button (click)="logout()" class="logout-btn">Log Out</button>
+  <!-- Log Out Button -->
+  <button (click)="logout()" class="logout-btn">
+    <fa-icon [icon]="faSignOutAlt"></fa-icon> Log Out
+  </button>
 </div>

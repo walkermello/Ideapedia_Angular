@@ -4,10 +4,18 @@ import { RouterModule } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http'; // Menggunakan provideHttpClient()
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenuNavigationComponent } from './layouts/menu-navigation/menu-navigation.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SafeUrlPipe } from '../core/pipes/safe-url';
 
 @NgModule({
-  declarations: [MenuNavigationComponent],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  declarations: [MenuNavigationComponent, SafeUrlPipe],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    FontAwesomeModule,
+  ],
   providers: [
     provideHttpClient(), // Menyediakan HttpClient
   ],
@@ -17,6 +25,7 @@ import { MenuNavigationComponent } from './layouts/menu-navigation/menu-navigati
     ReactiveFormsModule,
     RouterModule,
     MenuNavigationComponent,
+    SafeUrlPipe,
   ],
 })
 export class SharedModule {}

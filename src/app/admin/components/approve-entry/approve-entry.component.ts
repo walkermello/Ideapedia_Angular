@@ -12,6 +12,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./approve-entry.component.css'],
 })
 export class ApproveEntryComponent {
+  @ViewChild('titleModal') titleModal: any; // Reference to the title modal
+  @ViewChild('descriptionModal') descriptionModal: any; // Reference to the description modal
+  @ViewChild('content') content: any; // Reference to the preview file modal
+
   details: IDetailIdea[] = [];
   filteredDetails: IDetailIdea[] = []; // Data yang difilter berdasarkan pencarian
   pageNumber: number = 0;
@@ -21,6 +25,8 @@ export class ApproveEntryComponent {
   previewUrl: string | null = null;
   selectedItemId: number | null = null;
   searchQuery: string = ''; // Query pencarian yang dimasukkan pengguna
+  fullTitle: string = '';
+  fullDescription: string = '';
 
   modalTitle: string = '';
   modalContent: string = '';
@@ -40,12 +46,46 @@ export class ApproveEntryComponent {
     private detailService: DetailService,
     private userService: UserService,
     private fileService: FileService,
-    private modalservice: NgbModal
+    public modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
     this.loadDetails();
     this.loadUsers(); // Load users for the dropdown
+  }
+
+  // Fungsi untuk membuka modal judul
+  openTitleModal(judul: string) {
+    this.fullTitle = judul; // Menyimpan nilai judul untuk ditampilkan di modal
+    this.modalService.open(this.titleModal); // Menampilkan modal judul
+  }
+
+  // Fungsi untuk membuka modal deskripsi
+  openDescriptionModal(deskripsi: string) {
+    this.fullDescription = deskripsi; // Menyimpan nilai deskripsi untuk ditampilkan di modal
+    this.modalService.open(this.descriptionModal); // Menampilkan modal deskripsi
+  }
+
+  // Open modal for full text
+  openFullTextModal(content: string, title: string, modal: any): void {
+    this.modalTitle = title;
+    this.modalContent = content;
+    this.modalContentType = 'text';
+    this.modalService.open(modal, { size: 'lg' });
+  }
+
+  // Membuka modal dan menampilkan preview file
+  previewFile(ideaId: number, content: any): void {
+    this.fileService.getFilePreviewLink(ideaId).subscribe({
+      next: (response) => {
+        this.previewUrl = response.url; // URL untuk ditampilkan di modal
+        this.selectedItemId = ideaId; // Simpan ID item yang dipilih
+        this.modalService.open(content, { size: 'xl', backdrop: 'static' }); // Buka modal
+      },
+      error: (err) => {
+        console.error('Error fetching preview URL', err);
+      },
+    });
   }
 
   loadDetails(): void {
@@ -306,27 +346,5 @@ export class ApproveEntryComponent {
         );
       }
     });
-  }
-
-  // Membuka modal dan menampilkan preview file
-  previewFile(ideaId: number, content: any): void {
-    this.fileService.getFilePreviewLink(ideaId).subscribe({
-      next: (response) => {
-        this.previewUrl = response.url; // URL untuk ditampilkan di modal
-        this.selectedItemId = ideaId; // Simpan ID item yang dipilih
-        this.modalservice.open(content, { size: 'xl', backdrop: 'static' }); // Buka modal
-      },
-      error: (err) => {
-        console.error('Error fetching preview URL', err);
-      },
-    });
-  }
-
-  // Open modal for full text
-  openFullTextModal(content: string, title: string, modal: any): void {
-    this.modalTitle = title;
-    this.modalContent = content;
-    this.modalContentType = 'text';
-    this.modalservice.open(modal, { size: 'lg' });
   }
 }

@@ -1,13 +1,14 @@
 /* Style for the user list container */
 .user-list {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 20px auto;
-  padding: 20px;
+  padding: 30px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #faf6d4; /* Warna latar belakang sesuai palet */
 }
 
+/* Heading styling */
 .user-list h2 {
   text-align: center;
   color: #333;
@@ -23,9 +24,9 @@
 }
 
 .add-user-btn {
-  padding: 10px 20px;
-  background-color: #4caf50;
-  color: white;
+  padding: 12px 25px;
+  background-color: #f0d39d; /* Warna tombol sesuai palet */
+  color: black;
   border: none;
   border-radius: 5px;
   font-size: 16px;
@@ -34,7 +35,7 @@
 }
 
 .add-user-btn:hover {
-  background-color: #45a049;
+  background-color: #e4c793; /* Warna tombol saat hover */
 }
 
 /* Table styling */
@@ -52,8 +53,8 @@
 }
 
 .table th {
-  background-color: #4caf50;
-  color: #fff;
+  background-color: #f0d39d; /* Warna header tabel sesuai palet */
+  color: black;
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -78,8 +79,8 @@
 
 .pagination button {
   padding: 8px 16px;
-  background-color: #4caf50;
-  color: #fff;
+  background-color: #f0d39d; /* Warna tombol pagination sesuai palet */
+  color: black;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -93,7 +94,7 @@
 }
 
 .pagination button:hover:not(:disabled) {
-  background-color: #45a049;
+  background-color: #e4c793; /* Warna tombol pagination saat hover */
 }
 
 .pagination span {
@@ -146,8 +147,8 @@
 .pagination button {
   padding: 5px 10px;
   margin: 0 5px;
-  background-color: #007bff;
-  color: white;
+  background-color: #f0d39d; /* Warna tombol pagination sesuai palet */
+  color: black;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -156,4 +157,22 @@
 .pagination button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
+}
+
+/* Action Button styling */
+.btn-action {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.action-icon {
+  width: 25px;
+  height: 30px;
+  transition: transform 0.3s;
+}
+
+.btn-action:hover .action-icon {
+  transform: scale(1.2);
 }

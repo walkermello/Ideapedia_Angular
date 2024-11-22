@@ -49,6 +49,8 @@
         <th>No. HP</th>
         <th>Unit Kerja</th>
         <th>Admin</th>
+        <th>Action</th>
+        <!-- Added Action column -->
       </tr>
     </thead>
     <tbody>
@@ -59,6 +61,11 @@
         <td>{{ user.noHp }}</td>
         <td>{{ user.unitKerja.unitName }}</td>
         <td>{{ user.unitKerja.admin ? "Yes" : "No" }}</td>
+        <td>
+          <button class="btn-action" (click)="deleteUser(user.id)">
+            <img src="/img/delete.svg" alt="Delete" class="action-icon" />
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

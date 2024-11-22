@@ -5,6 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ListUserComponent } from './components/list-user/list-user.component';
 import { ApproveEntryComponent } from './components/approve-entry/approve-entry.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
+import { DeletedDataComponent } from './components/deleted-data/deleted-data.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,12 @@ const routes: Routes = [
   {
     path: 'add-user',
     component: AddUserComponent,
+    canActivate: [GuardService],
+    children: [],
+  },
+  {
+    path: 'deleted-data',
+    component: DeletedDataComponent,
     canActivate: [GuardService],
     children: [],
   },

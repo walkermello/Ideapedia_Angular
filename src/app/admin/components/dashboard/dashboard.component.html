@@ -58,7 +58,6 @@
               [src]="getUserImageUrl(item.idea.user.id)"
               alt="Creator Profile"
               class="rounded-circle"
-              style="width: 40px; height: 40px"
             />
           </div>
           <div class="creator-info me-auto">
@@ -83,11 +82,7 @@
 
           <!-- Description -->
           <p class="card-text text-muted">
-            {{
-              item.idea.deskripsi.length > 100
-                ? (item.idea.deskripsi | slice : 0 : 100) + "..."
-                : item.idea.deskripsi
-            }}
+            {{ item.idea.deskripsi }}
           </p>
         </div>
 
@@ -113,7 +108,7 @@
                 class="btn btn-danger w-100"
                 (click)="hideIdea(item.idea.id)"
               >
-                Hide Idea
+                Delete Idea
               </button>
             </li>
           </ul>
@@ -122,10 +117,9 @@
     </div>
   </div>
 
-  <!-- Pagination Controls -->
-  <div class="d-flex justify-content-center align-items-center mt-4">
+  <!-- Pagination -->
+  <div class="pagination">
     <button
-      class="btn btn-outline-primary me-2"
       (click)="onPageChange(pageNumber - 1)"
       [disabled]="pageNumber === 0"
     >
@@ -133,9 +127,8 @@
     </button>
     <span>Page {{ pageNumber + 1 }} of {{ totalPages }}</span>
     <button
-      class="btn btn-outline-primary ms-2"
       (click)="onPageChange(pageNumber + 1)"
-      [disabled]="pageNumber === totalPages - 1"
+      [disabled]="pageNumber + 1 === totalPages"
     >
       Next
     </button>

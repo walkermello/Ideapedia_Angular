@@ -1,0 +1,63 @@
+<div class="container">
+  <h2>Deleted Data</h2>
+
+  <!-- Pilihan untuk menampilkan Data yang Dihapus: User atau Idea -->
+  <div class="selection">
+    <button
+      (click)="showData('user')"
+      class="selection-btn"
+      [class.active]="selectedCategory === 'user'"
+    >
+      Show Deleted Users
+    </button>
+    <button
+      (click)="showData('idea')"
+      class="selection-btn"
+      [class.active]="selectedCategory === 'idea'"
+    >
+      Show Deleted Ideas
+    </button>
+  </div>
+
+  <!-- Daftar Data yang Dihapus: User -->
+  <div *ngIf="selectedCategory === 'user'">
+    <div *ngIf="deletedUsers.length === 0" class="empty-message">
+      No deleted users found.
+    </div>
+    <ul *ngIf="deletedUsers.length > 0" class="deleted-list">
+      <li *ngFor="let user of deletedUsers" class="deleted-item">
+        <div class="user-item">
+          <!-- Foto Profil User -->
+          <img
+            [src]="getUserImageUrl(user.id)"
+            alt="Profile Picture"
+            class="user-profile-img"
+          />
+
+          <div class="user-details">
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+          </div>
+
+          <!-- Button untuk aksi tambahan -->
+          <button class="btn btn-outline-secondary position-relative">
+            <fa-icon [icon]="faEllipsisH" class="fa-2x"></fa-icon>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Daftar Data yang Dihapus: Idea -->
+  <div *ngIf="selectedCategory === 'idea'">
+    <div *ngIf="deletedIdeas.length === 0" class="empty-message">
+      No deleted ideas found.
+    </div>
+    <ul *ngIf="deletedIdeas.length > 0" class="deleted-list">
+      <li *ngFor="let detail of deletedIdeas" class="deleted-item">
+        <h4>{{ detail.idea.judul }}</h4>
+        <p>{{ detail.idea.deskripsi }}</p>
+      </li>
+    </ul>
+  </div>
+</div>

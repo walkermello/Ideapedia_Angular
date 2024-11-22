@@ -10,7 +10,6 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { ApproveEntryComponent } from './components/approve-entry/approve-entry.component';
-import { ManageFilesComponent } from './components/manage-files/manage-files.component';
 import { ListUserComponent } from './components/list-user/list-user.component';
 
 // Core Module
@@ -19,14 +18,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NgxDocViewerModule } from 'ngx-doc-viewer'; // Correct import from the package
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DeletedDataComponent } from './components/deleted-data/deleted-data.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     AddUserComponent,
     ApproveEntryComponent,
-    ManageFilesComponent,
     DashboardComponent,
     ListUserComponent,
+    DeletedDataComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +39,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NgbModule,
     NgxDocViewerModule, // Add the NgxDocViewerModule here
     FontAwesomeModule,
+    SharedModule,
   ],
 })
 export class AdminModule {}

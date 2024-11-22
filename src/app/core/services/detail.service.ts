@@ -118,6 +118,31 @@ export class DetailService {
       .pipe(catchError(this.handleError));
   }
 
+  getDeleted(
+    page: number = 0,
+    size: number = 3,
+    sort: string = 'asc',
+    sortBy: string = 'id',
+    column: string = 'status',
+    value: string = 'Hidden'
+  ): Observable<ApiResponseDetailIdea> {
+    // Perbaiki URL sesuai dengan format yang diinginkan
+    const url = `${this.apiUrl}/${page}/${sort}/${sortBy}?size=${size}&col=${column}&val=${value}`;
+
+    console.log('Constructed URL: ', url); // Pastikan URL dibangun dengan benar
+
+    const token = localStorage.getItem('authToken'); // Konsisten dengan nama kunci di local storage
+    console.log('Retrieved Token from Local Storage:', token);
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token || ''}`, // Gunakan token atau string kosong jika token tidak ditemukan
+    });
+
+    return this.http
+      .get<ApiResponseDetailIdea>(url, { headers })
+      .pipe(catchError(this.handleError)); // Tangani error dengan baik
+  }
+
   private handleError(error: any): Observable<never> {
     console.error('Error occurred: ', error);
     return throwError('Something went wrong, please try again later.');

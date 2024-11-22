@@ -26,14 +26,37 @@
     </thead>
     <tbody>
       <tr *ngFor="let detail of filteredDetails">
-        <td>{{ detail.idea.judul }}</td>
-        <td>{{ detail.idea.deskripsi }}</td>
+        <!-- Judul -->
+        <td>
+          <span
+            (click)="openTitleModal(detail.idea.judul)"
+            class="truncate"
+            title="{{ detail.idea.judul }}"
+          >
+            {{ detail.idea.judul | slice : 0 : 20
+            }}{{ detail.idea.judul.length > 20 ? "..." : "" }}
+          </span>
+        </td>
+
+        <!-- Deskripsi -->
+        <td>
+          <span
+            (click)="openDescriptionModal(detail.idea.deskripsi)"
+            class="truncate"
+            title="{{ detail.idea.deskripsi }}"
+          >
+            {{ detail.idea.deskripsi | slice : 0 : 30
+            }}{{ detail.idea.deskripsi.length > 30 ? "..." : "" }}
+          </span>
+        </td>
+
         <td>
           <!-- Nama file klik membuka modal -->
           <a (click)="previewFile(detail.idea.id, content)">
             {{ detail.idea.fileName }}
           </a>
         </td>
+
         <td>{{ detail.idea.user.username }}</td>
         <td>{{ detail.idea.user.nip }}</td>
         <td>{{ detail.idea.user.unitKerja.unitName }}</td>
@@ -69,7 +92,39 @@
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal Title -->
+<ng-template #titleModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Full Title</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>{{ fullTitle }}</p>
+  </div>
+</ng-template>
+
+<!-- Modal Description -->
+<ng-template #descriptionModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Full Description</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>{{ fullDescription }}</p>
+  </div>
+</ng-template>
+
+<!-- Modal for File Preview -->
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title">Preview File</h4>

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';
 import { ApiResponseUser } from '../../../core/interfaces/i-api-response';
 import { IUser } from '../../../core/interfaces/i-user';
+import { faTrash } from '@fortawesome/free-solid-svg-icons'; // Import faTrash icon
 
 @Component({
   selector: 'app-list-user',
@@ -14,9 +15,10 @@ export class ListUserComponent implements OnInit {
   filteredUsers: IUser[] = [];
   pageNumber: number = 0;
   totalPages: number = 0;
-  pageSize: number = 3;
+  pageSize: number = 5;
   searchQuery = '';
   sortOrder = { username: 'desc', nip: 'desc' };
+  faTrash = faTrash; // Declare faTrash as a property
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -70,13 +72,16 @@ export class ListUserComponent implements OnInit {
 
   loadUsers(): void {
     console.log('Loading users for page:', this.pageNumber); // Debug
+
+    // Pastikan status yang difilter adalah 'Activated'
     this.userService
       .getUsers(
-        this.pageNumber,
-        this.pageSize,
-        'asc', // Sort order
-        'id', // Sort field
-        this.searchQuery
+        this.pageNumber, // Halaman yang sedang ditampilkan
+        this.pageSize, // Ukuran halaman
+        'asc', // Urutan sortir
+        'id', // Kolom sortir
+        'status', // Kolom yang akan difilter
+        'Activated' // Nilai yang akan difilter (status 'Activated')
       )
       .subscribe(
         (response: ApiResponseUser) => {
@@ -97,5 +102,16 @@ export class ListUserComponent implements OnInit {
 
   addUser(): void {
     this.router.navigate(['add-user']);
+  }
+
+  deleteUser(userId: number): void {
+    this.userService.deleteUser(userId).subscribe(
+      (response) => {
+        window.location.reload(); // Ini akan merefresh halaman setelah user dihapus
+      },
+      (error) => {
+        console.error('Failed to delete user:', error); // Menampilkan pesan error di console
+      }
+    );
   }
 }

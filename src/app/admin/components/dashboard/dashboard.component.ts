@@ -92,6 +92,9 @@ export class DashboardComponent implements OnInit {
         // Perbarui data frontend
         this.details = this.details.filter((item) => item.idea.id !== ideaId);
         this.overlayVisible = new Array(this.details.length).fill(false); // Reset overlayVisible
+
+        // Refresh halaman setelah ide disembunyikan
+        window.location.reload(); // Ini akan merefresh halaman
       },
       (error) => {
         console.error('Failed to hide idea:', error);

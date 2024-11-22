@@ -4,16 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutingModule } from './auth-routing.module';
 import { SigninComponent } from './pages/signin/signin.component';
 import { AuthService } from '../core/services/auth.service';
-import { SharedModule } from '../shared/shared.module';
+
 @NgModule({
   declarations: [SigninComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AuthRoutingModule,
-    SharedModule,
-  ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, AuthRoutingModule],
   exports: [SigninComponent], // Exporting SigninComponent
   providers: [AuthService], // Adding AuthService to providers
 })

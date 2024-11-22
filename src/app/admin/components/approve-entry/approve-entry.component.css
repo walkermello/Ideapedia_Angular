@@ -1,10 +1,14 @@
+/* Style for the new entry list container */
 .new-entry-list {
   margin: 20px;
   padding: 15px;
-  background-color: #f9f9f9;
+  background-color: #faf6d4; /* Sesuaikan dengan palet warna */
+  border: 1px solid #ddd;
   border-radius: 8px;
+  max-width: 1200px;
 }
 
+/* Heading styling */
 h2 {
   text-align: center;
   color: #3a3a3a;
@@ -12,6 +16,7 @@ h2 {
   margin-bottom: 20px;
 }
 
+/* Table styling */
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -30,8 +35,8 @@ td {
 }
 
 th {
-  background-color: #4caf50;
-  color: white;
+  background-color: #f0d39d; /* Warna header tabel sesuai palet */
+  color: black;
   font-weight: bold;
 }
 
@@ -40,10 +45,11 @@ tbody tr:nth-child(even) {
 }
 
 tbody tr:hover {
-  background-color: #e0e0e0;
+  background-color: #e9f7e9; /* Warna saat hover sesuai palet */
   cursor: pointer;
 }
 
+/* Pagination styling */
 .pagination {
   display: flex;
   justify-content: center;
@@ -54,8 +60,8 @@ tbody tr:hover {
 .pagination-btn {
   padding: 10px 20px;
   margin: 0 10px;
-  background-color: #4caf50;
-  color: white;
+  background-color: #f0d39d; /* Warna tombol pagination sesuai palet */
+  color: black;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -63,10 +69,15 @@ tbody tr:hover {
 }
 
 .pagination-btn:disabled {
-  background-color: #ccc;
+  background-color: #ddd;
   cursor: not-allowed;
 }
 
+.pagination-btn:hover:not(:disabled) {
+  background-color: #e4c793; /* Warna tombol pagination saat hover */
+}
+
+/* Action Button styling */
 .btn-action {
   background: none;
   border: none;
@@ -84,6 +95,35 @@ tbody tr:hover {
   transform: scale(1.2);
 }
 
+/* Styling for the search bar */
+.search-container {
+  margin: 15px 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.search-input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc; /* Warna border default */
+  border-radius: 4px;
+  width: 250px;
+}
+
+/* Mengubah border menjadi hitam saat input difokuskan */
+.form-control:focus {
+  border: 1px solid black; /* Ubah warna border saat input difokuskan */
+  outline: none; /* Menghilangkan outline default */
+  border-radius: 4px;
+  box-shadow: none; /* Optional: Tambahkan efek shadow */
+}
+
+/* Placeholder styling */
+.search-input::placeholder {
+  color: #888;
+}
+
+/* Error message styling */
 .error {
   color: red;
   font-size: 12px;
