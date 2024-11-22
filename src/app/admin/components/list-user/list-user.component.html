@@ -6,12 +6,45 @@
     <button class="add-user-btn" (click)="addUser()">Add User</button>
   </div>
 
+  <!-- Search Box -->
+  <div class="search-container">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (input)="onSearch()"
+      placeholder="Search by Username or NIP"
+      class="search-input"
+    />
+  </div>
+
   <!-- Table for user list -->
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Username</th>
-        <th>NIP</th>
+        <th (click)="sortTable('username')">
+          Username
+          <span *ngIf="sortOrder.username" class="sort-icon">
+            <i
+              class="fa"
+              [ngClass]="{
+                'fa-sort-up': sortOrder.username === 'asc',
+                'fa-sort-down': sortOrder.username === 'desc'
+              }"
+            ></i>
+          </span>
+        </th>
+        <th (click)="sortTable('nip')">
+          NIP
+          <span *ngIf="sortOrder.nip" class="sort-icon">
+            <i
+              class="fa"
+              [ngClass]="{
+                'fa-sort-up': sortOrder.nip === 'asc',
+                'fa-sort-down': sortOrder.nip === 'desc'
+              }"
+            ></i>
+          </span>
+        </th>
         <th>Email</th>
         <th>No. HP</th>
         <th>Unit Kerja</th>
@@ -19,7 +52,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
+      <tr *ngFor="let user of filteredUsers">
         <td>{{ user.username }}</td>
         <td>{{ user.nip }}</td>
         <td>{{ user.email }}</td>

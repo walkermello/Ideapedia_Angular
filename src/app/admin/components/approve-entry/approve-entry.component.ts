@@ -13,12 +13,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ApproveEntryComponent {
   details: IDetailIdea[] = [];
+  filteredDetails: IDetailIdea[] = []; // Data yang difilter berdasarkan pencarian
   pageNumber: number = 0;
-  totalPages: number = 1;
+  totalPages: number = 0;
   pageSize: number = 3;
   value: string = 'New Entry';
   previewUrl: string | null = null;
   selectedItemId: number | null = null;
+  searchQuery: string = ''; // Query pencarian yang dimasukkan pengguna
 
   modalTitle: string = '';
   modalContent: string = '';
@@ -58,7 +60,8 @@ export class ApproveEntryComponent {
       )
       .subscribe((response) => {
         this.details = response.content;
-        this.totalPages = response.total_pages;
+        this.filteredDetails = this.details; // Initialize filtered details with all data
+        this.updatePagination(); // Update pagination based on full details
       });
   }
 
@@ -68,9 +71,44 @@ export class ApproveEntryComponent {
     });
   }
 
+  onSearch() {
+    if (this.searchQuery.trim() === '') {
+      this.filteredDetails = this.details; // If search is empty, show all details
+    } else {
+      this.filteredDetails = this.details.filter(
+        (detail) =>
+          detail.idea.judul
+            .toLowerCase()
+            .includes(this.searchQuery.toLowerCase()) || // Match by title
+          detail.idea.user.nip
+            .toLowerCase()
+            .includes(this.searchQuery.toLowerCase()) || // Match by NIP
+          detail.idea.user.username
+            .toLowerCase()
+            .includes(this.searchQuery.toLowerCase()) // Match by creator/username
+      );
+    }
+    this.pageNumber = 0; // Reset halaman ke 0 setiap kali pencarian dilakukan
+    this.updatePagination(); // Update pagination based on filtered data
+  }
+
+  updatePagination() {
+    this.totalPages = Math.ceil(this.filteredDetails.length / this.pageSize); // Adjust total pages based on filtered details and page size
+  }
+
   onPageChange(page: number): void {
-    this.pageNumber = page;
-    this.loadDetails();
+    if (page >= 0 && page < this.totalPages) {
+      this.pageNumber = page;
+      this.updatePagination();
+      this.loadPaginatedDetails(); // Load paginated data
+    }
+  }
+
+  loadPaginatedDetails(): void {
+    // Paginate filtered data manually
+    const startIndex = this.pageNumber * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.filteredDetails = this.details.slice(startIndex, endIndex); // Slicing the filtered data for pagination
   }
 
   approveIdea(detail: IDetailIdea): void {

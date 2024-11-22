@@ -111,3 +111,24 @@
 .row.g-4 {
   row-gap: 1.5rem; /* Jarak vertikal antar elemen */
 }
+
+.overlay-options {
+  position: absolute;
+  top: 100%;
+  right: 10px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  width: 150px;
+  padding: 0.5rem;
+}
+
+.overlay-options ul {
+  margin: 0;
+  padding: 0;
+}
+.overlay-options li {
+  list-style: none;
+}

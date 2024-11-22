@@ -1,5 +1,17 @@
 <div class="new-entry-list">
   <h2>New Entry List</h2>
+
+  <!-- Search Input -->
+  <div class="search-container mb-3">
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="searchQuery"
+      (input)="onSearch()"
+      placeholder="Search by title, NIP, or creator..."
+    />
+  </div>
+
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -13,7 +25,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let detail of details">
+      <tr *ngFor="let detail of filteredDetails">
         <td>{{ detail.idea.judul }}</td>
         <td>{{ detail.idea.deskripsi }}</td>
         <td>

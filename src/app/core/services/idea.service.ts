@@ -34,4 +34,9 @@ export class IdeaService {
 
     return this.http.get<ApiResponseIdea>(url, { params });
   }
+
+  hideIdea(ideaId: number) {
+    const url = `${this.apiUrl}/hide-idea/${ideaId}`;
+    return this.http.post(url, {}); // Kirimkan request POST
+  }
 }

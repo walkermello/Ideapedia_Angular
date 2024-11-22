@@ -1,18 +1,67 @@
 <div class="container">
+  <div class="row mb-3">
+    <!-- Search Bar and Filters -->
+    <div class="col-md-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search..."
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="onSearch()"
+      />
+    </div>
+    <div class="col-md-3">
+      <select
+        class="form-control"
+        [(ngModel)]="selectedColumn"
+        (change)="onSearch()"
+      >
+        <option value="judul">Title</option>
+        <option value="deskripsi">Description</option>
+        <option value="userId">User</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <select
+        class="form-control"
+        [(ngModel)]="selectedSort"
+        (change)="onSearch()"
+      >
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <select
+        class="form-control"
+        [(ngModel)]="selectedSortBy"
+        (change)="onSearch()"
+      >
+        <option value="id">ID</option>
+        <option value="judul">Title</option>
+        <option value="createdAt">Created Date</option>
+      </select>
+    </div>
+  </div>
+
   <div class="row">
     <!-- Card layout for each item -->
-    <div class="col-md-4 mb-4" *ngFor="let item of details">
-      <div class="card" style="width: 18rem">
+    <div
+      class="col-md-4 mb-4"
+      *ngFor="let item of filteredDetails; let i = index"
+    >
+      <div class="card" style="width: 18rem; position: relative">
         <!-- Card Header: Creator Profile, Name, and Date -->
-        <div class="card-header">
-          <div class="profile-img">
+        <div class="card-header d-flex align-items-center">
+          <div class="profile-img me-2">
             <img
               [src]="getUserImageUrl(item.idea.user.id)"
               alt="Creator Profile"
               class="rounded-circle"
+              style="width: 40px; height: 40px"
             />
           </div>
-          <div class="creator-info">
+          <div class="creator-info me-auto">
             <strong>{{ item.idea.user.username }}</strong>
           </div>
           <div class="created-date">
@@ -42,13 +91,32 @@
           </p>
         </div>
 
-        <!-- Card Footer (optional, e.g., like, share buttons) -->
-        <div class="card-footer">
+        <!-- Card Footer -->
+        <div
+          class="card-footer d-flex justify-content-between align-items-center"
+        >
           <button class="btn btn-outline-primary"></button>
-          <button>
-            <fa-icon [icon]="faEllipsisH" class="fa-2x"></fa-icon>
-            <!-- Tiga titik horizontal -->
+          <button class="btn btn-outline-secondary position-relative">
+            <fa-icon
+              [icon]="faEllipsisH"
+              class="fa-2x"
+              (click)="toggleOverlay(i)"
+            ></fa-icon>
           </button>
+        </div>
+
+        <!-- Overlay -->
+        <div *ngIf="overlayVisible[i]" class="overlay-options">
+          <ul class="list-unstyled mb-0">
+            <li>
+              <button
+                class="btn btn-danger w-100"
+                (click)="hideIdea(item.idea.id)"
+              >
+                Hide Idea
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -67,7 +135,7 @@
     <button
       class="btn btn-outline-primary ms-2"
       (click)="onPageChange(pageNumber + 1)"
-      [disabled]="pageNumber + 1 === totalPages"
+      [disabled]="pageNumber === totalPages - 1"
     >
       Next
     </button>
