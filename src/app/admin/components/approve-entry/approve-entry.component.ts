@@ -20,7 +20,7 @@ export class ApproveEntryComponent {
   filteredDetails: IDetailIdea[] = []; // Data yang difilter berdasarkan pencarian
   pageNumber: number = 0;
   totalPages: number = 0;
-  pageSize: number = 3;
+  pageSize: number = 5;
   value: string = 'New Entry';
   previewUrl: string | null = null;
   selectedItemId: number | null = null;
@@ -101,7 +101,8 @@ export class ApproveEntryComponent {
       .subscribe((response) => {
         this.details = response.content;
         this.filteredDetails = this.details; // Initialize filtered details with all data
-        this.updatePagination(); // Update pagination based on full details
+        // Pastikan totalPages dihitung dari totalItems dan pageSize
+        this.totalPages = Math.ceil(response.total_items / this.pageSize);
       });
   }
 
@@ -132,23 +133,16 @@ export class ApproveEntryComponent {
     this.updatePagination(); // Update pagination based on filtered data
   }
 
-  updatePagination() {
-    this.totalPages = Math.ceil(this.filteredDetails.length / this.pageSize); // Adjust total pages based on filtered details and page size
-  }
-
   onPageChange(page: number): void {
     if (page >= 0 && page < this.totalPages) {
-      this.pageNumber = page;
-      this.updatePagination();
-      this.loadPaginatedDetails(); // Load paginated data
+      this.pageNumber = page; // Update pageNumber
+      this.loadDetails(); // Reload data sesuai halaman
     }
   }
 
-  loadPaginatedDetails(): void {
-    // Paginate filtered data manually
-    const startIndex = this.pageNumber * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.filteredDetails = this.details.slice(startIndex, endIndex); // Slicing the filtered data for pagination
+  updatePagination(): void {
+    // Pastikan totalPages dihitung berdasarkan total_pages dari API
+    this.totalPages = this.totalPages || 0; // Tetap gunakan nilai dari server
   }
 
   approveIdea(detail: IDetailIdea): void {
