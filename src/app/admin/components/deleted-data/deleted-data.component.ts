@@ -36,7 +36,7 @@ export class DeletedDataComponent implements OnInit {
     if (category === 'user') {
       // Pastikan userService.getDeleted() mengembalikan tipe ApiResponseUser
       this.userService
-        .getDeleted(0, 3, 'asc', 'id', 'status', 'Deleted')
+        .getDeleted(0, 20, 'asc', 'id', 'status', 'Deleted')
         .subscribe(
           (response: ApiResponseUser) => {
             this.deletedUsers = response.content; // Ambil data user yang dihapus

@@ -120,7 +120,7 @@ export class DetailService {
 
   getDeleted(
     page: number = 0,
-    size: number = 3,
+    size: number = 20,
     sort: string = 'asc',
     sortBy: string = 'id',
     column: string = 'status',
